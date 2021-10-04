@@ -22,11 +22,11 @@ At the beginning, create the work directory
 
 ## Synthesis and scan insertion
 Modify the scripts for the specific benchmark
-`dc_shell -f ../syn/dft.tcl`
+-- `dc_shell -f ../syn/dft.tcl`
 
 ## ATPG
 Modify the scripts for the specific benchmark
-`tmax -shell ../syn/tmax.tcl`
+-- `tmax -shell ../syn/tmax.tcl`
 
 ## Deviated netlists creation
 **Note: this stage can run on Ubuntu or MacOS only** If your Synopsys tools require another OS, need to move interim files around between the OS's.
@@ -34,9 +34,9 @@ The deviations are created by random gate insertions/deletions and wire reroutin
 Done using the HAL framework: https://github.com/emsec/hal/
 `git clone git@github.com:emsec/hal.git`
 Use the instructions in the repository to build HAL. Use the `-DBUILD_ALL_PLUGINS=1` flag in cmake.
-`python ../hal/random_netlist_noise.py`
+-- `python ../hal/random_netlist_noise.py`
 
 ## Simulation
 (Using Xcellium for example)
-`xrun -timescale 1ns/10ps <TOP>_sa_tb.v -v NanGate_15nm_OCL_v0.1_2014_06_Apache.A/front_end/verilog/NanGate_15nm_OCL_functional.v <TOP>.g.v`
+-- `xrun -timescale 1ns/10ps <TOP>_sa_tb.v -v NanGate_15nm_OCL_v0.1_2014_06_Apache.A/front_end/verilog/NanGate_15nm_OCL_functional.v <TOP>.g.v`
 
