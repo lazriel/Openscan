@@ -1,0 +1,7 @@
+[submodule "Scandid"]
+	path = Scandid
+	url = git@github.com:lazriel/Scandid.git
+[submodule "Subcircuit_recognition"]
+	path = Subcircuit_recognition
+	url = git@github.com:vistalab-technion/Subcircuit_recognition.git
+	branch = Leonid
