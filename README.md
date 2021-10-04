@@ -12,7 +12,7 @@ Includes several stages:
 4. Applying scan vector simulation to the deviated netlists
 
 At the beginning, create the work directory
-`mkdir work && cd work`
+- `mkdir work && cd work`
 
 ## Prerequisites
 * Obtain the open-source 15nm Nangate gate library (or modify the scripts to use your own)
@@ -32,7 +32,7 @@ Modify the scripts for the specific benchmark
 **Note: this stage can run on Ubuntu or MacOS only** If your Synopsys tools require another OS, need to move interim files around between the OS's.
 The deviations are created by random gate insertions/deletions and wire rerouting.
 Done using the HAL framework: https://github.com/emsec/hal/
-`git clone git@github.com:emsec/hal.git`
+- `git clone git@github.com:emsec/hal.git`
 Use the instructions in the repository to build HAL. Use the `-DBUILD_ALL_PLUGINS=1` flag in cmake.
 - `python ../hal/random_netlist_noise.py`
 
