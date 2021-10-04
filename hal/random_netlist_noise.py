@@ -4,12 +4,12 @@ numchanges = 5
 
 import sys, os
 # some necessary configuration:
-HAL_BASE = "/home/leonida/HAL/hal2/hal/build/"
+HAL_BASE = "hal/hal/build/"
 os.environ["HAL_BASE_PATH"] = HAL_BASE
 sys.path.append(HAL_BASE+"lib/")  # this is where your hal python lib is located
 
-hdl_file_path = "/home/leonida/openscan/"+DESIGN+".g.v"
-gate_library_path = "/home/leonida/openscan/NanGate_15nm_OCL_v0.1_2014_06_Apache.A/front_end/timing_power_noise/NanGate_15nm_OCL_functional.lib"
+hdl_file_path = DESIGN+".g.v"
+gate_library_path = "NanGate_15nm_OCL_v0.1_2014_06_Apache.A/front_end/timing_power_noise/NanGate_15nm_OCL_functional.lib"
 
 
 import hal_py

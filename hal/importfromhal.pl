@@ -1,4 +1,4 @@
-#!/bin/perl
+#!/usr/bin/env perl
 use List::MoreUtils qw(uniq);
 while(<>){
     next if (/^\s*$/);

@@ -3,15 +3,16 @@ set FILE "rv_top.v"
 set CLK clk
 set RST rst
 
-source init_nangate_lib.tcl
+source ../syn/init_nangate_lib.tcl
 
 define_name_rules mainrule -replacement_char "_" -restricted "/\[\]" \
     -equal_ports_nets
 
-#read_verilog -netlist $FILE
-analyze -format verilog ~/Scandid/benchmarks/rv/src/rv_top.v
-analyze -format verilog ~/Scandid/benchmarks/rv/src/rv_dp.v
-analyze -format verilog ~/Scandid/benchmarks/rv/src/rv_ctl.v
+# Benchmark-specific
+analyze -format verilog ../Scandid/benchmarks/rv/src/rv_top.v
+analyze -format verilog ../Scandid/benchmarks/rv/src/rv_dp.v
+analyze -format verilog ../Scandid/benchmarks/rv/src/rv_ctl.v
+#
 elaborate $TOP
 current_design $TOP
 link
@@ -26,7 +27,6 @@ set_dft_signal -view existing -type Reset -active_state 1 -port $RST
 set_scan_configuration -style multiplexed_flip_flop
 
 compile -scan -ungroup
-#ungroup -all -flatten
 change_names -rules mainrule -hierarchy
 
 create_test_protocol
