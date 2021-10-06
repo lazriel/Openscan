@@ -2,8 +2,7 @@
 Framework for running benchmark for the Openscan concept
 
 This project includes submodules. Don't forget to fetch them after cloning:
-`git submodule init`
-`git submodule update`
+- `git submodule init && git submodule update`
 
 Includes several stages:
 1. Synthesis and scan inserton with Synopsys DC
