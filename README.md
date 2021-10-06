@@ -16,6 +16,7 @@ At the beginning, create the work directory
 
 ## Prerequisites
 * Obtain the open-source 15nm Nangate gate library (or modify the scripts to use your own)
+    - To work with the given scripts, put/link the root dir of the library in work/
 * Synopsys DC and TetraMax licenses
 * HAL installation (see below)
 
@@ -33,7 +34,7 @@ Modify the scripts for the specific benchmark
 The deviations are created by random gate insertions/deletions and wire rerouting.
 Done using the HAL framework: https://github.com/emsec/hal/
 - `git clone git@github.com:emsec/hal.git`
-Use the instructions in the repository to build HAL. Use the `-DBUILD_ALL_PLUGINS=1` flag in cmake.
+Use the instructions in the repository to build HAL. Use the `-DPL_BOOLEAN_INFLUENCE=1` flag in cmake.
 - `python ../hal/random_netlist_noise.py`
 
 ## Simulation
