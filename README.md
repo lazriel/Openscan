@@ -14,7 +14,7 @@ At the beginning, create the work directory
 - `mkdir work && cd work`
 
 ## Prerequisites
-* Obtain the open-source 15nm Nangate gate library (or modify the scripts to use your own)
+* Obtain the free for academic use 15nm Nangate gate library (or modify the scripts to use your own)
     - To work with the given scripts, put/link the root dir of the library in work/
 * Synopsys DC and TetraMax licenses
 * HAL installation (see below)
