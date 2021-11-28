@@ -1,4 +1,4 @@
-DESIGN = "rv_top"
+DESIGN = "ibex_top"
 numcopies = 10
 numchanges = 5
 
