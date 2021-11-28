@@ -35,6 +35,8 @@ Done using the HAL framework: https://github.com/emsec/hal/
 - `git clone git@github.com:emsec/hal.git`
 Use the instructions in the repository to build HAL. Use the `-DPL_BOOLEAN_INFLUENCE=1` flag in cmake.
 - `python ../hal/random_netlist_noise.py`
+HAL outputs slighly different netlist format. To return to the original format, use the following script after making the relevant modifications for your neltist
+- `../hal/importfromhal.pl <TOP>.<NUM>.g.v > <NEWNAME>`
 
 ## Simulation
 (Using Xcellium for example)
