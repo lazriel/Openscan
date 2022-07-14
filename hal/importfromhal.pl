@@ -1,6 +1,10 @@
 #!/usr/bin/env perl
 use List::MoreUtils qw(uniq);
-while(<>){
+my $modulebase = shift or die "Usage: $0 modulebase\n";
+my @files = <$modulebase*.g.v>;
+foreach my $file (@files) {
+  open(IN,'<', $file) or die "Can't open $file for reading\n";
+  while(<IN>){
     next if (/^\s*$/);
     next if (/^\s*(input|output|inout)/);
     s/\\'1'/1'b1/;
@@ -8,22 +12,32 @@ while(<>){
     if (/^\s*module/){
         s/module\s+(\w+)\s*\(//;
         $modulename = $1;
+        open(OUT,'>', "netlists/$modulename.g.v") or die "Can't open netlists/$modulename.g.v for writing\n";
         s/\)\s*;\s*$//;
         s/\\|(\(\d+\))//g;
         s/,/ /g;
         @ports = split(/\s+/);
         @ports = uniq(@ports);
         if ($modulename =~ "rv_top.*"){
-            print "module $modulename (".join(',',@ports).", so);\n";
-            print "  output [31:0] imem_addr;\n";
-            print "  output [31:0] dmem_addr;\n";
-            print "  output [31:0] dmem_dataout;\n";
-            print "  input [31:0] dmem_datain;\n";
-            print "  input [31:0] imem_datain;\n";
-            print "  input clk, rst, si, se;\n";
-            print "  output memrw, so;\n";
+            print OUT "module $modulename (".join(',',@ports).", so);\n";
+            print OUT "  output [31:0] imem_addr;\n";
+            print OUT "  output [31:0] dmem_addr;\n";
+            print OUT "  output [31:0] dmem_dataout;\n";
+            print OUT "  input [31:0] dmem_datain;\n";
+            print OUT "  input [31:0] imem_datain;\n";
+            print OUT "  input clk, rst, si, se;\n";
+            print OUT "  output memrw, so;\n";
+        }
+        elsif ($modulename =~ "aes_128.*"){
+            print OUT "module $modulename ( clk, state, key, out, si, so, se );
+  input [127:0] state;
+  input [127:0] key;
+  output [127:0] out;
+  input clk, si, se;
+  output so;
+  assign so = out[127];\n";
         } else { # ibex_top
-            print "module $modulename 
+            print OUT "module $modulename 
             ( clk_i, rst_ni, test_en_i, hart_id_i, boot_addr_i, 
         instr_req_o, instr_gnt_i, instr_rvalid_i, instr_addr_o, instr_rdata_i, 
         instr_rdata_intg_i, instr_err_i, data_req_o, data_gnt_i, data_rvalid_i, 
@@ -222,18 +236,19 @@ while(<>){
             $maxind{$1} = $2 if ((not exists $maxind{$1}) or ($2 > $maxind{$1}));
             $minind{$1} = $2 if ((not exists $minind{$1}) or ($2 < $minind{$1}));
         } else {
-            print "  wire $wire;\n";
+            print OUT "  wire $wire;\n";
         }
     } else {
         if ($inwires == 1) {
             $inwires = 2;
             foreach $vec (keys %maxind)
             {
-	            print "  wire $vec\[$maxind{$vec}:$minind{$vec}\];\n";
+	            print OUT "  wire \[$maxind{$vec}:$minind{$vec}\] $vec;\n";
             }
-            print "assign so = imem_addr[31];" if ($modulename =~ "rv_top.*"); # HAL bug
+            print OUT "assign so = imem_addr[31];" if ($modulename =~ "rv_top.*"); # HAL bug
         }
         s/\\(\w+)\((\d+)\)/$1\[$2\]/g;
-        print;
+        print OUT;
     }
+  }
 }
