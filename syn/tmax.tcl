@@ -1,4 +1,4 @@
-set top ibex_top
+set top aes_128
 set mode sa
 set_messages -log ${top}_${mode}_atpg.log -replace
 read_netlist ${top}.g.v
