@@ -36,6 +36,9 @@ Done using the HAL framework: https://github.com/emsec/hal/
 Follow the instructions in the repository to build HAL. Use the `-DPL_BOOLEAN_INFLUENCE=1` flag in cmake.
 - `python ../hal/random_netlist_noise.py`
 
+HAL outputs slighly different netlist format. To return to the original format, use the following script after making the relevant modifications for your neltist
+- `../hal/importfromhal.pl <TOP>.<NUM>.g.v > <NEWNAME>`
+
 ## Simulation
 (Using Xcellium for example)
 - `xrun -timescale 1ns/10ps <TOP>_sa_tb.v -v NanGate_15nm_OCL_v0.1_2014_06_Apache.A/front_end/verilog/NanGate_15nm_OCL_functional.v <TOP>.g.v`
